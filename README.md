@@ -1,4 +1,4 @@
-# ELG Hospital Management
+# ELG Hospital Management - Beta
 
 ELG Hospital Management is an open-source Laravel-based project designed to streamline and automate the management of a hospital. It provides a comprehensive solution for managing patient details, records, appointments, parent details, staff details, and staff attendance.
 
