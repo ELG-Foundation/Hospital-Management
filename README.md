@@ -28,5 +28,5 @@ Contributions are welcome! If you have any suggestions, bug reports, or feature 
 
 ## Support
 
-If you need any assistance or have any questions, please feel free to contact us at support@elghospitalmanagement.com.
+If you need any assistance or have any questions, please feel free to contact us at support@elg.foundation.
 
