@@ -42,7 +42,7 @@ class PatientRecordResource extends Resource
                         ->columnSpan(2)
                         ->imageEditor()
                         ->previewable(),
-                    Select::make('patient_parents_name')
+                    Select::make('patient_parents_id')
                         ->relationship('patient_parents', 'parent_name')
                         ->label('Parent')
                         ->native(false)
@@ -57,12 +57,12 @@ class PatientRecordResource extends Resource
                                 ->required()->tel(),
                         ])
                         ->columnSpan(1),
-                    Select::make('patient_id')
+                    Select::make('patients_id')
                         ->relationship('patients', 'patient_name')
                         ->label('Patient')
                         ->native(false)
                         ->searchable()
-                        ->preload()
+                        ->preload()->required()
                         ->createOptionForm([
                             TextInput::make('patient_name'),
                             DatePicker::make('patient_dob')

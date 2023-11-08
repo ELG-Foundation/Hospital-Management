@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('parent_name');
             $table->string('parent_mail')->nullable();
-            $table->integer('parent_number')->nullable();
+            $table->string('parent_number')->nullable();
             $table->timestamps();
         });
     }
