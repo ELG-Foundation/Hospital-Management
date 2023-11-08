@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PatientRecordResource\Pages;
 use App\Filament\Resources\PatientRecordResource\RelationManagers;
 use App\Models\PatientRecord;
+use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
@@ -46,16 +47,35 @@ class PatientRecordResource extends Resource
                         ->native(false)
                         ->searchable()
                         ->preload()
+                        ->createOptionForm([
+                            TextInput::make('parent_name')
+                                ->required(),
+                            TextInput::make('parent_mail')
+                                ->required()->email(),
+                            TextInput::make('parent_number')
+                                ->required()->tel(),
+                        ])
                         ->columnSpan(1),
                     Select::make('patient_id')
                         ->relationship('patients', 'patient_name')
                         ->label('Patient')
                         ->native(false)
                         ->searchable()
-                        ->preload(),
+                        ->preload()
+                        ->createOptionForm([
+                            TextInput::make('patient_name'),
+                            DatePicker::make('patient_dob')
+                                ->native(false),
+                            TextInput::make('description'),
+                            Select::make('patient_parents_id')
+                            ->relationship('patient_parents', 'parent_name')
+                            ->label('Parent')
+                            ->native(false)
+                            ->searchable()
+                            ->preload()
+                        ]),
                     DatePicker::make('appointment_date')
                         ->columnSpan(1)
-                        ->format('d/m/Y')
                         ->native(false),
                     TimePicker::make('appointment_time')
                         ->native(false)
@@ -68,8 +88,11 @@ class PatientRecordResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('patient_parents_id'),
-                TextColumn::make('patients_id'),
+                TextColumn::make('id'),
+                TextColumn::make('patient_parents.parent_name')
+                    ->searchable(),
+                TextColumn::make('patients.patient_name')
+                    ->searchable(),
                 ImageColumn::make('records')
                     ->circular()
             ])
@@ -78,6 +101,8 @@ class PatientRecordResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
