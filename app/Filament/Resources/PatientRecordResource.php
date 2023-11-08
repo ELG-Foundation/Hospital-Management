@@ -20,6 +20,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PatientRecordResource extends Resource
@@ -68,11 +69,11 @@ class PatientRecordResource extends Resource
                                 ->native(false),
                             TextInput::make('description'),
                             Select::make('patient_parents_id')
-                            ->relationship('patient_parents', 'parent_name')
-                            ->label('Parent')
-                            ->native(false)
-                            ->searchable()
-                            ->preload()
+                                ->relationship('patient_parents', 'parent_name')
+                                ->label('Parent')
+                                ->native(false)
+                                ->searchable()
+                                ->preload()
                         ]),
                     DatePicker::make('appointment_date')
                         ->columnSpan(1)
@@ -89,10 +90,15 @@ class PatientRecordResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id'),
-                TextColumn::make('patient_parents.parent_name')
-                    ->searchable(),
                 TextColumn::make('patients.patient_name')
-                    ->searchable(),
+                    ->searchable()
+                    ->label('Patient Name'),
+                TextColumn::make('patient_parents.parent_name')
+                    ->searchable()
+                    ->label('Parent Name'),
+                TextColumn::make('updated_at')
+                    ->label('Last Visit')
+                    ->date(),
                 ImageColumn::make('records')
                     ->circular()
             ])
@@ -100,9 +106,9 @@ class PatientRecordResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-                
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
