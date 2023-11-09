@@ -26,8 +26,7 @@ return new class extends Migration
             $table->string('status')
                 ->nullable();
 
-            $table->date('appointment_date')->nullable();
-            $table->time('appointment_time')->nullable();
+            $table->date('visit_date')->nullable();
             $table->timestamps();
         });
     }

@@ -20,8 +20,11 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\CheckboxList;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Enums\PatientStatus;
 
 class PatientRecordResource extends Resource
 {
@@ -75,12 +78,17 @@ class PatientRecordResource extends Resource
                                 ->searchable()
                                 ->preload()
                         ]),
-                    DatePicker::make('appointment_date')
+                    Select::make('status')
+                        ->options([
+                            'admite' => 'Admitted',
+                            'discharge' => 'Discharged',
+                            'ontreat' => 'On Treatment',
+                            'home' => 'Home'
+                        ])
+                        ->native(false),
+                    DatePicker::make('visit_date')
                         ->columnSpan(1)
                         ->native(false),
-                    TimePicker::make('appointment_time')
-                        ->native(false)
-                        ->seconds(false),
                 ])->columns(2)
             ]);
     }
@@ -96,9 +104,10 @@ class PatientRecordResource extends Resource
                 TextColumn::make('patient_parents.parent_name')
                     ->searchable()
                     ->label('Parent Name'),
-                TextColumn::make('updated_at')
+                TextColumn::make('visit_date')
                     ->label('Last Visit')
                     ->date(),
+                TextColumn::make('status'),
                 ImageColumn::make('records')
                     ->circular()
             ])

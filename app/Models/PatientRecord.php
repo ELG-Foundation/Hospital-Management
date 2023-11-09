@@ -22,9 +22,11 @@ class PatientRecord extends Model
 
     protected $fillable = [
         'patients',
+        'patients_id',
         'patient_parents_id',
         'patient_parents',
         'records',
+        'status',
         'appointment_date',
         'appointment_time',
     ];
