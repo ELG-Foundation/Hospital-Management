@@ -10,6 +10,32 @@ ELG Hospital Management is an open-source Laravel-based project designed to stre
 - **Admin Panel**: Access a powerful admin panel to manage and monitor the entire hospital management system.
 - **User Panel**: Provide a user-friendly interface for patients, parents, and staff to access relevant information and perform necessary actions.
 
+## To-Do List
+
+### Admin Panel
+- [ ] Design and implement the admin panel layout
+- [ ] Add user profile management features
+- [ ] Implement authorization and security features
+- [ ] Develop data viewing and editing functionalities
+- [ ] Integrate with third-party services as needed
+
+### Staff Panel
+- [ ] Design and implement the staff panel layout
+- [ ] Add user profile management features
+- [ ] Implement authorization and security features
+- [ ] Develop data viewing and editing functionalities
+- [ ] Integrate with third-party services as needed
+
+### Mail Notifications to Parents
+- [ ] Develop a system for triggering notifications (e.g., based on specific events or actions)
+- [ ] Integrate with a mail service to send out notifications
+- [ ] Test the notification system to ensure it works correctly
+
+### Front End
+- [ ] Design and implement the front end layout
+- [ ] Make the front end customizable (e.g., allow admins to change the color scheme, layout, etc.)
+- [ ] Test the front end on various devices and browsers to ensure it's responsive and works correctly
+
 ## Installation
 
 **Note: This is a beta version and is not ready for production use.**
