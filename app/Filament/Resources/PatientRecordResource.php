@@ -25,6 +25,7 @@ use Filament\Forms\Components\CheckboxList;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Enums\PatientStatus;
+use App\Enums\Status;
 
 class PatientRecordResource extends Resource
 {
@@ -79,12 +80,13 @@ class PatientRecordResource extends Resource
                                 ->preload()
                         ]),
                     Select::make('status')
-                        ->options([
-                            'admite' => 'Admitted',
-                            'discharge' => 'Discharged',
-                            'ontreat' => 'On Treatment',
-                            'home' => 'Home'
-                        ])
+                        // ->options([
+                        //     'admite' => 'Admitted',
+                        //     'discharge' => 'Discharged',
+                        //     'ontreat' => 'On Treatment',
+                        //     'home' => 'Home'
+                        // ])
+                        ->options(PatientStatus::class)
                         ->native(false),
                     DatePicker::make('visit_date')
                         ->columnSpan(1)
@@ -107,7 +109,7 @@ class PatientRecordResource extends Resource
                 TextColumn::make('visit_date')
                     ->label('Last Visit')
                     ->date(),
-                TextColumn::make('status'),
+                TextColumn::make('status')->badge(),
                 ImageColumn::make('records')
                     ->circular()
             ])

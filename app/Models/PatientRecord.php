@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PatientStatus;
 use Filament\Forms\Components\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +12,9 @@ class PatientRecord extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'status' => PatientStatus::class
+    ];
 
     public function patient_parents(): BelongsTo {
         return $this->belongsTo(PatientParents::class);
@@ -27,7 +31,6 @@ class PatientRecord extends Model
         'patient_parents',
         'records',
         'status',
-        'appointment_date',
-        'appointment_time',
+        'visit_date',
     ];
 }

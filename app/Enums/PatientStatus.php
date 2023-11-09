@@ -2,32 +2,36 @@
 
 namespace App\Enums;
 
+use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
-enum Status: string implements HasLabel
+enum PatientStatus: string implements HasLabel, HasColor
 {
-    case Admitted = 'admitted';
+    case Admitted = 'Admitted';
     case Discharged = 'discharged';
-    case OnTreatment = 'ontreatment';
-    case Home = 'home';
+    case OnTreatment = 'Discharged';
+    case Home = 'Home';
+    case Emergency = 'Emergency';
 
     public function getLabel(): ?string
     {
         return match ($this) {
             self::Admitted => 'Admitted',
             self::Discharged => 'Discharged',
-            self::OnTreatment => 'OnTreatment',
+            self::OnTreatment => 'On Treatment',
             self::Home => 'Home',
+            self::Emergency => 'Emergency',
         };
     }
 
-    // public function getColor(): string | array | null
-    // {
-    //     return match ($this) {
-    //         self::Discharged => 'gray',
-    //         self::Admitted => 'warning',
-    //         self::Home => 'success',
-    //         self::OnTreatment => 'danger',
-    //     };
-    // }
+    public function getColor(): string | array | null
+    {
+        return match ($this) {
+            self::Discharged => 'gray',
+            self::Admitted => 'warning',
+            self::Home => 'success',
+            self::OnTreatment => 'primary',
+            self::Emergency => 'danger',
+        };
+    }
 }
