@@ -80,12 +80,6 @@ class PatientRecordResource extends Resource
                                 ->preload()
                         ]),
                     Select::make('status')
-                        // ->options([
-                        //     'admite' => 'Admitted',
-                        //     'discharge' => 'Discharged',
-                        //     'ontreat' => 'On Treatment',
-                        //     'home' => 'Home'
-                        // ])
                         ->options(PatientStatus::class)
                         ->native(false),
                     DatePicker::make('visit_date')
