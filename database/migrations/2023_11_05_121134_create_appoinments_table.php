@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('appointments', function (Blueprint $table) {
+        Schema::create('appoinments', function (Blueprint $table) {
             $table->id();
-            $table->string('parent_name');
+            $table->string('parent_name')->nullable();
             $table->string('parent_mail')->nullable();
             $table->integer('parent_number')->nullable();
-            $table->string('patient_name');
+            $table->string('patient_name')->nullable();
             $table->foreignId('patient_parents_id')
                 ->constrained('patient_parents');
-            $table->date('appoinment_date');
-            $table->time('appoinment_time');
+            $table->date('appoinment_date')->nullable();
             $table->timestamps();
         });
     }

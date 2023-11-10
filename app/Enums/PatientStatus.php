@@ -8,8 +8,8 @@ use Filament\Support\Contracts\HasLabel;
 enum PatientStatus: string implements HasLabel, HasColor
 {
     case Admitted = 'Admitted';
-    case Discharged = 'discharged';
-    case OnTreatment = 'Discharged';
+    case Discharged = 'Discharged';
+    case OnTreatment = 'On Treatment';
     case Home = 'Home';
     case Emergency = 'Emergency';
 
