@@ -35,11 +35,11 @@ class PatientParentsResource extends Resource
                     ->description('For Edit, Create, Delete Parent Details')
                     ->schema([
                         TextInput::make('parent_name')
-                        ->required(),
+                            ->required(),
                         TextInput::make('parent_mail')
-                        ->required()->email(),
+                            ->required()->email(),
                         TextInput::make('parent_number')
-                        ->required()->tel(),
+                            ->required()->tel(),
                     ])->columns(1)
             ]);
     }
@@ -49,13 +49,14 @@ class PatientParentsResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')
-                ->label('S.No'),
-                TextColumn::make('parent_name'),
+                    ->label('S.No'),
+                TextColumn::make('parent_name')
+                    ->searchable(),
                 TextColumn::make('parent_mail'),
                 TextColumn::make('parent_number'),
                 TextColumn::make('updated_at')
-                ->label('Last vist')
-                ->date('d M Y'),
+                    ->label('Last vist')
+                    ->date('d M Y'),
             ])
             ->filters([
                 //
@@ -72,14 +73,14 @@ class PatientParentsResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -87,5 +88,5 @@ class PatientParentsResource extends Resource
             'create' => Pages\CreatePatientParents::route('/create'),
             'edit' => Pages\EditPatientParents::route('/{record}/edit'),
         ];
-    }    
+    }
 }
