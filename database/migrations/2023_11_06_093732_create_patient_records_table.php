@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('patient_records', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('patient_parents_id')
+            $table->foreignId('patient_parents_id')->nullable()
                 ->constrained('patient_parents');
 
-            $table->foreignId('patients_id')
+            $table->foreignId('patients_id')->nullable()
                 ->constrained('patients');
 
             $table->string('records')
@@ -26,8 +26,7 @@ return new class extends Migration
             $table->string('status')
                 ->nullable();
 
-            $table->date('appointment_date');
-            $table->time('appointment_time');
+            $table->date('visit_date')->nullable();
             $table->timestamps();
         });
     }

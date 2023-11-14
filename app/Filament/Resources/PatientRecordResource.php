@@ -20,8 +20,12 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\CheckboxList;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Enums\PatientStatus;
+use App\Enums\Status;
 
 class PatientRecordResource extends Resource
 {
@@ -42,7 +46,7 @@ class PatientRecordResource extends Resource
                         ->columnSpan(2)
                         ->imageEditor()
                         ->previewable(),
-                    Select::make('patient_parents_name')
+                    Select::make('patient_parents_id')
                         ->relationship('patient_parents', 'parent_name')
                         ->label('Parent')
                         ->native(false)
@@ -57,12 +61,12 @@ class PatientRecordResource extends Resource
                                 ->required()->tel(),
                         ])
                         ->columnSpan(1),
-                    Select::make('patient_id')
+                    Select::make('patients_id')
                         ->relationship('patients', 'patient_name')
                         ->label('Patient')
                         ->native(false)
                         ->searchable()
-                        ->preload()
+                        ->preload()->required()
                         ->createOptionForm([
                             TextInput::make('patient_name'),
                             DatePicker::make('patient_dob')
@@ -75,12 +79,12 @@ class PatientRecordResource extends Resource
                                 ->searchable()
                                 ->preload()
                         ]),
-                    DatePicker::make('appointment_date')
+                    Select::make('status')
+                        ->options(PatientStatus::class)
+                        ->native(false),
+                    DatePicker::make('visit_date')
                         ->columnSpan(1)
                         ->native(false),
-                    TimePicker::make('appointment_time')
-                        ->native(false)
-                        ->seconds(false),
                 ])->columns(2)
             ]);
     }
@@ -96,9 +100,10 @@ class PatientRecordResource extends Resource
                 TextColumn::make('patient_parents.parent_name')
                     ->searchable()
                     ->label('Parent Name'),
-                TextColumn::make('updated_at')
+                TextColumn::make('visit_date')
                     ->label('Last Visit')
                     ->date(),
+                TextColumn::make('status')->badge(),
                 ImageColumn::make('records')
                     ->circular()
             ])
