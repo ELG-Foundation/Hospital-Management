@@ -11,7 +11,7 @@ ELG Hospital Management is an open-source Laravel-based project designed to stre
 - **User Panel**: Provide a user-friendly interface for patients, parents, and staff to access relevant information and perform necessary actions.
 
 ## Installation
-** Note: Its not ready to use in production or local use **
+**Note: Its not ready to use in production or local use**
 1. Clone the repository: `git clone https://github.com/ELG-Foundation/Hosptial-Management.git`
 2. Install dependencies: `composer install`
 3. Configure the database connection in the `.env` file.
