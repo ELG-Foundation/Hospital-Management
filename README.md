@@ -22,7 +22,7 @@ ELG Hospital Management is an open-source Laravel-based project designed to stre
 
 ## License
 
-ELG Hospital Management is released under the MIT License. See [LICENSE](LICENSE) for more information.
+ELG Hospital Management is released under the Apache License. See [LICENSE](LICENSE) for more information.
 
 ## Contributing
 
