@@ -10,6 +10,8 @@ class EditPatientView extends EditRecord
 {
     protected static string $resource = PatientViewResource::class;
 
+    protected static ?string $title = 'Patient Details';
+
     protected function getHeaderActions(): array
     {
         return [
