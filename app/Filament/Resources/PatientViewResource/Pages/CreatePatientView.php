@@ -9,4 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreatePatientView extends CreateRecord
 {
     protected static string $resource = PatientViewResource::class;
+
+    protected static ?string $title = 'Patient Details';
 }

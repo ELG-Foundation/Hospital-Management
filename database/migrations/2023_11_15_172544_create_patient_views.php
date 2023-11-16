@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('patient_views', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->string('dob')->nullable();
+            $table->string('blood_type')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

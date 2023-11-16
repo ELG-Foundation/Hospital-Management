@@ -6,9 +6,14 @@ use App\Filament\Resources\PatientViewResource\Pages;
 use App\Filament\Resources\PatientViewResource\RelationManagers;
 use App\Models\PatientView;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -19,11 +24,30 @@ class PatientViewResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Patient';
+
+    protected static ?string $navigationLabel = 'Patient Details';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Section::make([
+                    TextInput::make('name')
+                    ->required(),
+                    DatePicker::make('dob')
+                    ->required()
+                    ->native(false),
+                    Select::make('blood_type')
+                    ->required()
+                    ->native(false)
+                    ->options([
+                        'AB+' => 'AB+',
+                        'AB-' => 'AB-'
+                    ]),
+                    TextInput::make('description')
+                    ->required(),
+                ])->columns(2)
             ]);
     }
 
@@ -31,13 +55,21 @@ class PatientViewResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')
+                ->searchable(),
+                TextColumn::make('dob')
+                ->date('d M Y'),
+                TextColumn::make('blood_type'),
+                TextColumn::make('description'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                ->label(false),
+                Tables\Actions\DeleteAction::make()
+                ->label(false),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
