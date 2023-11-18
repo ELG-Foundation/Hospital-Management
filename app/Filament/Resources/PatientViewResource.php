@@ -2,26 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\BloodType;
 use App\Filament\Resources\PatientViewResource\Pages;
 use App\Filament\Resources\PatientViewResource\RelationManagers;
 use App\Models\PatientView;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
-<<<<<<< Updated upstream
-=======
-use Filament\Forms\Components\FileUpload;
->>>>>>> Stashed changes
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-<<<<<<< Updated upstream
-=======
-use Filament\Tables\Columns\ImageColumn;
->>>>>>> Stashed changes
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -43,7 +34,6 @@ class PatientViewResource extends Resource
             ->schema([
                 Section::make([
                     TextInput::make('name')
-<<<<<<< Updated upstream
                     ->required(),
                     DatePicker::make('dob')
                     ->required()
@@ -57,26 +47,6 @@ class PatientViewResource extends Resource
                     ]),
                     TextInput::make('description')
                     ->required(),
-=======
-                    ->required()
-                    ->columnSpan(1)
-                    ->label('Name'),
-                    DatePicker::make('dob')
-                    ->required()->native(false)
-                    ->label('Date Of Birth'),
-                    Select::make('blood')
-                    ->options(BloodType::class)
-                    ->native(false)
-                    ->label('Blood Type'),
-                    TextInput::make('desc')
-                    ->label('Condition Or Note'),
-                    FileUpload::make('img')
-                    ->directory('/patient')
-                    ->image()
-                    ->imageEditor()
-                    ->label('Image')
-                    ->columnSpan(2),
->>>>>>> Stashed changes
                 ])->columns(2)
             ]);
     }
@@ -85,27 +55,12 @@ class PatientViewResource extends Resource
     {
         return $table
             ->columns([
-<<<<<<< Updated upstream
                 TextColumn::make('name')
                 ->searchable(),
                 TextColumn::make('dob')
                 ->date('d M Y'),
                 TextColumn::make('blood_type'),
                 TextColumn::make('description'),
-=======
-                ImageColumn::make('img')
-                ->label('Image')
-                ->circular(),
-                TextColumn::make('name')
-                ->label('Name'),
-                TextColumn::make('dob')
-                ->label('Date Of Birth')
-                ->date('d M Y'),
-                TextColumn::make('blood')
-                ->label('Blood Type'),
-                TextColumn::make('desc')
-                ->label('Notes'),
->>>>>>> Stashed changes
             ])
             ->filters([
                 //
