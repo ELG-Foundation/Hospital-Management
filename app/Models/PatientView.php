@@ -11,6 +11,7 @@ class PatientView extends Model
 {
     use HasFactory;
 
+<<<<<<< Updated upstream
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -43,5 +44,13 @@ class PatientView extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+=======
+    protected $fillable = [
+        'name',
+        'dob',
+        'blood',
+        'desc',
+        'img',
+>>>>>>> Stashed changes
     ];
 }
