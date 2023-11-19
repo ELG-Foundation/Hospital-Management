@@ -37,21 +37,26 @@ class PatientViewResource extends Resource
                 Section::make([
                     TextInput::make('name')
                     ->required()
+                    ->label('Name')
                     ->columns(1),
                     DatePicker::make('dob')
                     ->required()
+                    ->label('Date Of Birth')
                     ->native(false),
-                    Select::make('blood_type')
+                    Select::make('blood')
                     ->required()
+                    ->label('Blood Tyoe')
                     ->native(false)
                     ->options(BloodType::class),
-                    TextInput::make('description')
+                    TextInput::make('desc')
+                    ->label('Notes')
                     ->required(),
                     FileUpload::make('img')
                     ->image()
                     ->imageEditor()
+                    ->label('Image')
                     ->directory('/patiet')
-                    ->columns(2),
+                    ->columnSpan(2),
                 ])->columns(2)
             ]);
     }
