@@ -15,6 +15,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -52,7 +53,6 @@ class PatientViewResource extends Resource
                     ->label('Notes')
                     ->required(),
                     FileUpload::make('img')
-                    ->image()
                     ->imageEditor()
                     ->label('Image')
                     ->directory('/patiet')
@@ -65,12 +65,22 @@ class PatientViewResource extends Resource
     {
         return $table
             ->columns([
+                ImageColumn::make('img')
+                ->circular()
+                ->label('Image'),
                 TextColumn::make('name')
-                ->searchable(),
+                ->searchable()
+                ->label('Name'),
+                TextColumn::make('blood')
+                ->label('Blood Tyoe'),
                 TextColumn::make('dob')
-                ->date('d M Y'),
-                TextColumn::make('blood_type'),
-                TextColumn::make('description'),
+                ->date('d M Y')
+                ->label('Date Of Birth'),
+                TextColumn::make('desc')
+                ->label('Notes'),
+                TextColumn::make('updated_at')
+                ->date('d M Y')
+                ->label('Visited At')
             ])
             ->filters([
                 //
