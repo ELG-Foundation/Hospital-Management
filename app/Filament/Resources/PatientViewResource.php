@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\BloodType;
 use App\Filament\Resources\PatientViewResource\Pages;
 use App\Filament\Resources\PatientViewResource\RelationManagers;
 use App\Models\PatientView;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -34,19 +36,22 @@ class PatientViewResource extends Resource
             ->schema([
                 Section::make([
                     TextInput::make('name')
-                    ->required(),
+                    ->required()
+                    ->columns(1),
                     DatePicker::make('dob')
                     ->required()
                     ->native(false),
                     Select::make('blood_type')
                     ->required()
                     ->native(false)
-                    ->options([
-                        'AB+' => 'AB+',
-                        'AB-' => 'AB-'
-                    ]),
+                    ->options(BloodType::class),
                     TextInput::make('description')
                     ->required(),
+                    FileUpload::make('img')
+                    ->image()
+                    ->imageEditor()
+                    ->directory('/patiet')
+                    ->columns(2),
                 ])->columns(2)
             ]);
     }
