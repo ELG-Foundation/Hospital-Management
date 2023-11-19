@@ -2,17 +2,20 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\BloodType;
 use App\Filament\Resources\PatientViewResource\Pages;
 use App\Filament\Resources\PatientViewResource\RelationManagers;
 use App\Models\PatientView;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -34,19 +37,26 @@ class PatientViewResource extends Resource
             ->schema([
                 Section::make([
                     TextInput::make('name')
-                    ->required(),
+                    ->required()
+                    ->label('Name')
+                    ->columns(1),
                     DatePicker::make('dob')
                     ->required()
+                    ->label('Date Of Birth')
                     ->native(false),
-                    Select::make('blood_type')
+                    Select::make('blood')
                     ->required()
+                    ->label('Blood Tyoe')
                     ->native(false)
-                    ->options([
-                        'AB+' => 'AB+',
-                        'AB-' => 'AB-'
-                    ]),
-                    TextInput::make('description')
+                    ->options(BloodType::class),
+                    TextInput::make('desc')
+                    ->label('Notes')
                     ->required(),
+                    FileUpload::make('img')
+                    ->imageEditor()
+                    ->label('Image')
+                    ->directory('/patiet')
+                    ->columnSpan(2),
                 ])->columns(2)
             ]);
     }
@@ -55,12 +65,22 @@ class PatientViewResource extends Resource
     {
         return $table
             ->columns([
+                ImageColumn::make('img')
+                ->circular()
+                ->label('Image'),
                 TextColumn::make('name')
-                ->searchable(),
+                ->searchable()
+                ->label('Name'),
+                TextColumn::make('blood')
+                ->label('Blood Tyoe'),
                 TextColumn::make('dob')
-                ->date('d M Y'),
-                TextColumn::make('blood_type'),
-                TextColumn::make('description'),
+                ->date('d M Y')
+                ->label('Date Of Birth'),
+                TextColumn::make('desc')
+                ->label('Notes'),
+                TextColumn::make('updated_at')
+                ->date('d M Y')
+                ->label('Visited At')
             ])
             ->filters([
                 //

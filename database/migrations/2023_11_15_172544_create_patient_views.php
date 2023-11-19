@@ -14,16 +14,10 @@ return new class extends Migration
         Schema::create('patient_views', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-<<<<<<< Updated upstream
-            $table->string('dob')->nullable();
-            $table->string('blood_type')->nullable();
-            $table->text('description')->nullable();
-=======
             $table->date('dob')->nullable();
             $table->string('blood')->nullable();
             $table->string('desc')->nullable();
             $table->string('img')->nullable();
->>>>>>> Stashed changes
             $table->timestamps();
         });
     }
